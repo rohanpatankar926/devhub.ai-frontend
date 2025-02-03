@@ -230,17 +230,19 @@ const VideoUploader = () => {
           <progress value={uploadProgress} max="100" style={{ width: "100%" }} />
         </foreignObject>
 
-        {/* Task Status Display */}
-        <text
-          x="150"
-          y="580" // Adjusted y-coordinate to fit within the SVG height
-          fontFamily="Arial"
-          fontSize="18"
-          fontWeight="bold"
-          fill="#1e293b"
-        >
-          Task Status: {taskStatus}
-        </text>
+        {/* Conditionally render Task Status Display */}
+        {uploadStatus === "Job submitted successfully!" && (
+          <text
+            x="150"
+            y="590" // Adjusted y-coordinate to fit within the SVG height
+            fontFamily="Arial"
+            fontSize="18"
+            fontWeight="bold"
+            fill="#1e293b"
+          >
+            Task Status: {taskStatus}
+          </text>
+        )}
       </svg>
     </div>
   );
