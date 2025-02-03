@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Hls from "hls.js";
+import './App.css'
 
 const VideoPlayer = ({ videoUrl }) => {
     const videoRef = useRef(null);
@@ -99,12 +100,13 @@ const App = () => {
 
     return (
         <div>
-            <h1>M3U8 Video Player</h1>
+            <h1>Login</h1>
 
             {/* Login Screen */}
             {!isAuthenticated ? (
                 <div>
-                    <h3>Enter Credentials</h3>
+                    <h3>Enter Credential</h3>
+                    
                     <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     <button onClick={handleLogin} disabled={isLoading}>
