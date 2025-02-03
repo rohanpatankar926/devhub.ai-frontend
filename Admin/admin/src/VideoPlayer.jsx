@@ -16,6 +16,7 @@ const VideoUploader = () => {
   const [githubLink, setGithubLink] = useState("");
   const [jobResponse, setJobResponse] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [taskStatus, setTaskStatus] = useState(""); // New state for task status
 
   const handleFileChange = (e) => {
     setVideoFile(e.target.files[0]);
@@ -30,6 +31,7 @@ const VideoUploader = () => {
     setIsUploading(true);
     setUploadStatus("Uploading...");
     setUploadProgress(0);
+    setTaskStatus("Pending"); // Set task status to "Pending" when upload starts
 
     const totalChunks = Math.ceil(videoFile.size / CHUNK_SIZE);
     const videoId = `${Date.now()}-${videoFile.name.replace(/\s+/g, "_")}`;
@@ -59,6 +61,7 @@ const VideoUploader = () => {
         console.error("Error uploading chunk:", error);
         setUploadStatus("Upload failed. Please try again.");
         setIsUploading(false);
+        setTaskStatus("Failed"); // Set task status to "Failed" if upload fails
         return;
       }
     }
@@ -89,6 +92,7 @@ const VideoUploader = () => {
       const result = await response.json();
       setUploadStatus("Job submitted successfully!");
       setJobResponse(result);
+      setTaskStatus(result.task_status || "Completed"); // Set task status from response
 
       // Show the alert when job is successfully submitted
       alert("Job Submitted Successfully!");
@@ -96,6 +100,7 @@ const VideoUploader = () => {
     } catch (error) {
       console.error("Error submitting job:", error);
       setUploadStatus("Job submission failed. Please try again.");
+      setTaskStatus("Failed"); // Set task status to "Failed" if job submission fails
     } finally {
       setIsUploading(false);
     }
@@ -225,19 +230,17 @@ const VideoUploader = () => {
           <progress value={uploadProgress} max="100" style={{ width: "100%" }} />
         </foreignObject>
 
-        {/* Job Submission Status in SVG */}
-        {jobResponse && jobResponse.task_status && (
-          <text
-            x="150"
-            y="600"
-            fontFamily="Arial"
-            fontSize="18"
-            fontWeight="bold"
-            fill="#1e293b"
-          >
-            Task Status: {jobResponse.task_status}
-          </text>
-        )}
+        {/* Task Status Display */}
+        <text
+          x="150"
+          y="580" // Adjusted y-coordinate to fit within the SVG height
+          fontFamily="Arial"
+          fontSize="18"
+          fontWeight="bold"
+          fill="#1e293b"
+        >
+          Task Status: {taskStatus}
+        </text>
       </svg>
     </div>
   );
