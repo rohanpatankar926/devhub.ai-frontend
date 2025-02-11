@@ -125,70 +125,77 @@ const VideoUploader = () => {
 
   return (
     <div className="main-container">
-      <div className="form-section">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-          <defs>
-            <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: "#f6f8ff" }} />
-              <stop offset="100%" style={{ stopColor: "#eef2ff" }} />
-            </linearGradient>
-            <linearGradient id="button-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: "#6366f1" }} />
-              <stop offset="100%" style={{ stopColor: "#4f46e5" }} />
-            </linearGradient>
-          </defs>
+    <div className="form-section">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+        <defs>
+          <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: "#f6f8ff" }} />
+            <stop offset="100%" style={{ stopColor: "#eef2ff" }} />
+          </linearGradient>
+          <linearGradient id="button-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: "#6366f1" }} />
+            <stop offset="100%" style={{ stopColor: "#4f46e5" }} />
+          </linearGradient>
+        </defs>
 
-          <rect width="800" height="600" fill="url(#bg-gradient)" />
-          <rect x="100" y="50" width="600" height="500" rx="20" fill="white" fillOpacity="0.9" stroke="#e2e8f0" strokeWidth="1" />
-          <circle cx="650" cy="100" r="40" fill="#6366f1" fillOpacity="0.1" />
-          <circle cx="150" cy="500" r="30" fill="#6366f1" fillOpacity="0.1" />
+        <rect width="800" height="600" fill="url(#bg-gradient)" />
+        <rect x="100" y="50" width="600" height="500" rx="20" fill="white" fillOpacity="0.9" stroke="#e2e8f0" strokeWidth="1" />
+        <circle cx="650" cy="100" r="40" fill="#6366f1" fillOpacity="0.1" />
+        <circle cx="150" cy="500" r="30" fill="#6366f1" fillOpacity="0.1" />
 
-          <text x="150" y="100" fontFamily="Arial" fontSize="28" fontWeight="bold" fill="#1e293b">
-            Submit Your Work
-          </text>
-          <text x="150" y="130" fontFamily="Arial" fontSize="14" fill="#64748b">
-            Fill in the details below to submit your course work
-          </text>
+        <text x="150" y="100" fontFamily="Arial" fontSize="28" fontWeight="bold" fill="#1e293b">
+          Submit Your Work
+        </text>
+        <text x="150" y="130" fontFamily="Arial" fontSize="14" fill="#64748b">
+          Fill in the details below to submit your course work
+        </text>
 
-          <foreignObject x="150" y="160" width="500" height="50">
-            <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} className="form-input" />
-          </foreignObject>
+        <foreignObject x="150" y="160" width="500" height="50">
+          <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} className="form-input" />
+        </foreignObject>
 
-          <foreignObject x="150" y="220" width="500" height="50">
-            <input type="text" placeholder="Session" value={session} onChange={(e) => setSession(e.target.value)} className="form-input" />
-          </foreignObject>
+        <foreignObject x="150" y="220" width="500" height="50">
+          <input type="text" placeholder="Session" value={session} onChange={(e) => setSession(e.target.value)} className="form-input" />
+        </foreignObject>
 
-          <foreignObject x="150" y="280" width="500" height="50">
-            <input type="text" placeholder="Course Name" value={courseName} onChange={(e) => setCourseName(e.target.value)} className="form-input" />
-          </foreignObject>
+        <foreignObject x="150" y="280" width="500" height="50">
+          <input type="text" placeholder="Course Name" value={courseName} onChange={(e) => setCourseName(e.target.value)} className="form-input" />
+        </foreignObject>
 
-          <foreignObject x="150" y="340" width="500" height="70">
-            <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} className="form-textarea" />
-          </foreignObject>
+        <foreignObject x="150" y="340" width="500" height="70">
+          <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} className="form-textarea" />
+        </foreignObject>
 
-          <foreignObject x="150" y="420" width="240" height="50">
-            <input type="text" placeholder="GitHub Link" value={githubLink} onChange={(e) => setGithubLink(e.target.value)} className="form-input" />
-          </foreignObject>
+        {/* GitHub Link - kept at original position */}
+        <foreignObject x="150" y="420" width="240" height="50">
+          <input type="text" placeholder="GitHub Link" value={githubLink} onChange={(e) => setGithubLink(e.target.value)} className="form-input" />
+        </foreignObject>
+        
+        {/* Course Work - moved down to 455 */}
+        <foreignObject x="150" y="475" width="500" height="50">
+          <input type="text" placeholder="Course Work" value={courseWork} onChange={(e) => setCourseWork(e.target.value)} className="form-input" />
+        </foreignObject>
 
-          <foreignObject x="410" y="420" width="240" height="50">
-            <input type="file" accept="video/mp4" onChange={(e) => setVideoFile(e.target.files[0])} className="form-input" />
-          </foreignObject>
+        <foreignObject x="410" y="420" width="240" height="50">
+          <input type="file" accept="video/mp4" onChange={(e) => setVideoFile(e.target.files[0])} className="form-input" />
+        </foreignObject>
 
-          <foreignObject x="150" y="490" width="500" height="50">
-            <button 
-              onClick={handleUploadAndSubmit} 
-              disabled={!videoFile || isUploading}
-              className="submit-button"
-            >
-              {isUploading ? "Uploading..." : "Submit Work"}
-            </button>
-          </foreignObject>
+        <foreignObject x="150" y="540" width="500" height="50">
+          <button 
+            onClick={handleUploadAndSubmit} 
+            disabled={!videoFile || isUploading}
+            className="submit-button"
+          >
+            {isUploading ? "Uploading..." : "Submit Work"}
+          </button>
+        </foreignObject>
 
-          <foreignObject x="150" y="550" width="500" height="20">
-            <progress value={uploadProgress} max="100" className="progress-bar" />
-          </foreignObject>
-        </svg>
-      </div>
+        <foreignObject x="150" y="580" width="500" height="20">
+          <progress value={uploadProgress} max="100" className="progress-bar" />
+        </foreignObject>
+      </svg>
+    </div>
+
 
       <div className="processing-jobs">
         <h2>Processing Jobs</h2>
